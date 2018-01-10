@@ -1,5 +1,8 @@
 <html>
 <?php
+
+	require_once("class.task.php");
+	
 	$name = '';
 	$descr = '';
 	$priority = '';
@@ -27,13 +30,15 @@
 	//echo $status;
 	//echo $date;
 	
-	$db = new mysqli("localhost", "root", "pass1234", "todo");
+	//$db = new mysqli("localhost", "root", "pass1234", "todo");
 	//echo $db;
-	$statement = "INSERT INTO task(name, descr, priority, status, due_date) VALUES('".$name."', '".$descr."', '".$priority."', '".$status."', '".$date."');";
-	echo $statement;
-	$r1 = $db->query($statement);
-	echo $r1;
-	print $r1;
+	//$statement = "INSERT INTO task(name, descr, priority, status, due_date) VALUES('".$name."', '".$descr."', '".$priority."', '".$status."', '".$date."');";
+	//echo $statement;
+	//$r1 = $db->query($statement);
+	//echo $r1;
+	//print $r1;
+	$task = new task(null, $name, $descr, $priority, $status, $date);
+	$task->add_task();
 	
 	echo "<form action='main.php' method='post'>";
 	echo "<input type='submit'>";
