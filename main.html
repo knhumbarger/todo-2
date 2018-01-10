@@ -15,7 +15,7 @@
 	$r2 = $db->query("USE todo;");
 	echo $r2;
 	
-	$r3 = $db->query("CREATE TABLE task(id INTEGER AUTO_INCREMENT, name VARCHAR(15), descr VARCHAR(255), priority ENUM('high', 'medium', 'low'), status ENUM('in progress', 'complete', 'not started'), due_date DATE), PRIMARY KEY(id);");
+	$r3 = $db->query("CREATE TABLE task(id INTEGER AUTO_INCREMENT, name VARCHAR(15), descr VARCHAR(255), priority ENUM('high', 'medium', 'low'), status ENUM('in progress', 'complete', 'not started'), due_date DATE, PRIMARY KEY(id));");
 	
 	//add task 
 	echo '<form action="add_task.php" method="post">';
@@ -37,7 +37,7 @@
 	echo '</form>';
 	
 	//for testing purposes
-	$r5 = $db->query("INSERT INTO task VALUES('testname', 'test description', 'high', 'in progress', '2018-01-09');");
+	$r5 = $db->query("INSERT INTO task(name, descr, priority, status, due_date) VALUES('testname', 'test description', 'high', 'in progress', '2018-01-09');");
 	
 	
 	$r4 = $db->query("SELECT * FROM task");
@@ -52,7 +52,8 @@
 	echo '</form>';
 	
 	while ($row = $r4->fetch_array()){
-		echo '<form>';
+		echo '<form action"delete_task.php" method="post">';
+		echo '<input type="text" name="id" value='.$row["id"].'>';
 		echo '<input type="text" name="name" value='.$row["name"].'>';
 		echo '<input type="text" name="descr" value='.$row["descr"].'>';
 		echo '<input type="text" name="priority" value='.$row["priority"].'>';
