@@ -8,7 +8,9 @@
 <body>
 <?php
 	require_once('class.mySQLDAO.php');
+	
 	$status='';
+	
 	//check for get method status variable
 	if(isset($_GET['status'])){
 		$status = $_GET['status'];
@@ -19,11 +21,6 @@
 	$mySQL = new mySQLDAO("localhost", "root", "pass1234");
 	$mySQL->create_DB();
 	$mySQL->create_tables();
-	
-	//$db = new mysqli("localhost", "root", "pass1234");
-	//$r1 = $db->query("CREATE DATABASE IF NOT EXISTS todo;");
-	//$r2 = $db->query("USE todo;");
-	//$r3 = $db->query("CREATE TABLE task(id INTEGER AUTO_INCREMENT, name VARCHAR(15), descr VARCHAR(255), priority ENUM('high', 'medium', 'low'), status ENUM('pending', 'started', 'completed', 'late'), due_date DATE, PRIMARY KEY(id));");
 	
 	//add task 
 	echo '<form action="add_task.php" method="post">';
@@ -46,11 +43,9 @@
 	
 	if($status == ''){
 		$statement = "SELECT * FROM task";
-		//$r4 = $db->query("SELECT * FROM task");
 	}
 	else{
 		$statement = "SELECT * FROM task WHERE status='".$status."';";
-		//$r4 = $db->query("SELECT * FROM task WHERE status='".$status."';");
 	}
 	$r4 = $mySQL->execute_query($statement);
 	
