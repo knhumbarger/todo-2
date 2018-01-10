@@ -7,6 +7,7 @@
 </head>
 <body>
 <?php
+	require_once('class.mySQLDAO.php');
 	$status='';
 	//check for get method status variable
 	if(isset($_GET['status'])){
@@ -15,13 +16,14 @@
 	
 	echo "STATUS ".$status;
 	
-	$db = new mysqli("localhost", "root", "pass1234");
-
-	$r1 = $db->query("CREATE DATABASE IF NOT EXISTS todo;");
+	$mySQL = new mySQLDAO("localhost", "root", "pass1234");
+	$mySQL->create_DB();
+	$mySQL->create_tables();
 	
-	$r2 = $db->query("USE todo;");
-	
-	$r3 = $db->query("CREATE TABLE task(id INTEGER AUTO_INCREMENT, name VARCHAR(15), descr VARCHAR(255), priority ENUM('high', 'medium', 'low'), status ENUM('pending', 'started', 'completed', 'late'), due_date DATE, PRIMARY KEY(id));");
+	//$db = new mysqli("localhost", "root", "pass1234");
+	//$r1 = $db->query("CREATE DATABASE IF NOT EXISTS todo;");
+	//$r2 = $db->query("USE todo;");
+	//$r3 = $db->query("CREATE TABLE task(id INTEGER AUTO_INCREMENT, name VARCHAR(15), descr VARCHAR(255), priority ENUM('high', 'medium', 'low'), status ENUM('pending', 'started', 'completed', 'late'), due_date DATE, PRIMARY KEY(id));");
 	
 	//add task 
 	echo '<form action="add_task.php" method="post">';
@@ -43,11 +45,14 @@
 	echo '</form>';
 	
 	if($status == ''){
-		$r4 = $db->query("SELECT * FROM task");
+		$statement = "SELECT * FROM task";
+		//$r4 = $db->query("SELECT * FROM task");
 	}
 	else{
-		$r4 = $db->query("SELECT * FROM task WHERE status='".$status."';");
+		$statement = "SELECT * FROM task WHERE status='".$status."';";
+		//$r4 = $db->query("SELECT * FROM task WHERE status='".$status."';");
 	}
+	$r4 = $mySQL->execute_query($statement);
 	
 	//headings
 	echo '<form>';
@@ -71,23 +76,23 @@
 		echo '</form>';
 	}
 	
-	$r5 = $db->query("SELECT COUNT(*) FROM task;");
+	$r5 = $mySQL->execute_query("SELECT COUNT(*) FROM task;");
 	$count_total = $r5->fetch_row();
 	echo 'Total tasks: <a href="main.php">'.$count_total[0].'</a><br>';
 	
-	$r6 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'pending';");
+	$r6 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'pending';");
 	$pending_total = $r6->fetch_row();
 	echo 'Total pending tasks: <a href="main.php?status=pending">'.$pending_total[0].'</a><br>';
 	
-	$r7 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'started';");
+	$r7 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'started';");
 	$started_total = $r7->fetch_row();
 	echo 'Total started tasks: <a href="main.php?status=started">'.$started_total[0].'</a><br>';
 	
-	$r8 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'completed';");
+	$r8 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'completed';");
 	$completed_total = $r8->fetch_row();
 	echo 'Total completed tasks: <a href="main.php?status=completed">'.$completed_total[0].'</a><br>';
 	
-	$r9 = $db->query("SELECT COUNT(*) FROM task WHERE status='late';");
+	$r9 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status='late';");
 	$late_total = $r9->fetch_row();
 	echo 'Total late tasks: <a href="main.php?status=late">'.$late_total[0].'</a><br>';
 	
