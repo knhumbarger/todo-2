@@ -7,6 +7,14 @@
 </head>
 <body>
 <?php
+	$status='';
+	//check for get method status variable
+	if(isset($_GET['status'])){
+		$status = $_GET['status'];
+	}
+	
+	echo "STATUS ".$status;
+	
 	$db = new mysqli("localhost", "root", "pass1234");
 
 	$r1 = $db->query("CREATE DATABASE IF NOT EXISTS todo;");
@@ -34,8 +42,12 @@
 	echo '<input type="submit">';
 	echo '</form>';
 	
-	
-	$r4 = $db->query("SELECT * FROM task");
+	if($status == ''){
+		$r4 = $db->query("SELECT * FROM task");
+	}
+	else{
+		$r4 = $db->query("SELECT * FROM task WHERE status='".$status."';");
+	}
 	
 	//headings
 	echo '<form>';
@@ -59,25 +71,25 @@
 		echo '</form>';
 	}
 	
-	$r5 = $db->query("SELECT COUNT(*) FROM task");
+	$r5 = $db->query("SELECT COUNT(*) FROM task;");
 	$count_total = $r5->fetch_row();
-	echo 'Total tasks: '.$count_total[0].'<br>';
+	echo 'Total tasks: <a href="main.php">'.$count_total[0].'</a><br>';
 	
-	$r6 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'pending'");
+	$r6 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'pending';");
 	$pending_total = $r6->fetch_row();
-	echo 'Total pending tasks: '.$pending_total[0].'<br>';
+	echo 'Total pending tasks: <a href="main.php?status=pending">'.$pending_total[0].'</a><br>';
 	
-	$r7 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'started'");
+	$r7 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'started';");
 	$started_total = $r7->fetch_row();
-	echo 'Total started tasks: '.$started_total[0].'<br>';
+	echo 'Total started tasks: <a href="main.php?status=started">'.$started_total[0].'</a><br>';
 	
-	$r8 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'completed'");
+	$r8 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'completed';");
 	$completed_total = $r8->fetch_row();
-	echo 'Total completed tasks: '.$completed_total[0].'<br>';
+	echo 'Total completed tasks: <a href="main.php?status=completed">'.$completed_total[0].'</a><br>';
 	
-	$r9 = $db->query("SELECT COUNT(*) FROM task WHERE status='late'");
+	$r9 = $db->query("SELECT COUNT(*) FROM task WHERE status='late';");
 	$late_total = $r9->fetch_row();
-	echo 'Total late tasks: '.$late_total[0].'<br>';
+	echo 'Total late tasks: <a href="main.php?status=late">'.$late_total[0].'</a><br>';
 	
 ?>
 </body>
