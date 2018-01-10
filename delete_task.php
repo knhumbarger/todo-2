@@ -25,14 +25,7 @@
 	if(isset($_POST['due_date'])){
 		$date = $_POST['due_date'];
 	};
-	//$db = new mysqli("localhost", "root", "pass1234", "todo");
-	//echo $db;
-	//$statement = "DELETE FROM task WHERE id=".$id.";";
-	//echo $statement;
-	//$r1 = $db->query($statement);
-	//echo $r1;
-	//print $r1;
-	
+
 	$task = new task(null, $name, $descr, $priority, $status, $date);
 	$task->delete_task();
 	

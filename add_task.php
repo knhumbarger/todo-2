@@ -24,19 +24,7 @@
 	if(isset($_POST['due_date'])){
 		$date = $_POST['due_date'];
 	};
-	//echo $name;
-	//echo $descr;
-	//echo $priority;
-	//echo $status;
-	//echo $date;
 	
-	//$db = new mysqli("localhost", "root", "pass1234", "todo");
-	//echo $db;
-	//$statement = "INSERT INTO task(name, descr, priority, status, due_date) VALUES('".$name."', '".$descr."', '".$priority."', '".$status."', '".$date."');";
-	//echo $statement;
-	//$r1 = $db->query($statement);
-	//echo $r1;
-	//print $r1;
 	$task = new task(null, $name, $descr, $priority, $status, $date);
 	$task->add_task();
 	
