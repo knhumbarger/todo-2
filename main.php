@@ -49,12 +49,12 @@
 	
 	while ($row = $r4->fetch_array()){
 		echo '<form action="delete_task.php" method="post">';
-		echo '<input type="text" name="id" value='.$row["id"].'>';
-		echo '<input type="text" name="name" value='.$row["name"].'>';
-		echo '<input type="text" name="descr" value='.$row["descr"].'>';
-		echo '<input type="text" name="priority" value='.$row["priority"].'>';
-		echo '<input type="text" name="status" value='.$row["status"].'>';
-		echo '<input type="text" name="due_date" value='.$row["due_date"].'>';
+		echo '<input type="text" name="id" value="'.$row["id"].'">';
+		echo '<input type="text" name="name" value="'.$row["name"].'">';
+		echo '<input type="text" name="descr" value="'.$row["descr"].'">';
+		echo '<input type="text" name="priority" value="'.$row["priority"].'">';
+		echo '<input type="text" name="status" value="'.$row["status"].'">';
+		echo '<input type="text" name="due_date" value="'.$row["due_date"].'">';
 		echo '<input type="submit" value="delete">';
 		echo '</form>';
 	}
