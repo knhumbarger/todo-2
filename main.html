@@ -32,12 +32,12 @@
 	
 	//headings
 	echo '<form>';
-		echo '<input type="text" name="name" value="name">';
-		echo '<input type="text" name="descr" value="description">';
-		echo '<input type="text" name="priority" value="priority">';
-		echo '<input type="text" name="status" value="status">';
-		echo '<input type="text" name="due_date" value="due date">';
-		echo '</form>';
+	echo '<input type="text" name="name" value="name" style="font-weight:bold;">';
+	echo '<input type="text" name="descr" value="description" style="font-weight:bold;">';
+	echo '<input type="text" name="priority" value="priority" style="font-weight:bold;">';
+	echo '<input type="text" name="status" value="status" style="font-weight:bold;">';
+	echo '<input type="text" name="due_date" value="due date" style="font-weight:bold;">';
+	echo '</form>';
 	
 	while ($row = $r4->fetch_array()){
 		echo '<form>';
@@ -48,6 +48,8 @@
 		echo '<input type="text" name="due_date" value='.$row["due_date"].'>';
 		echo '</form>';
 	}
+	
+	//echo '</form>';
 ?>
 </body>
 </html>
