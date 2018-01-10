@@ -30,6 +30,15 @@
 	$r4 = $db->query("SELECT * FROM task");
 	//echo $r4;
 	
+	//headings
+	echo '<form>';
+		echo '<input type="text" name="name" value="name">';
+		echo '<input type="text" name="descr" value="description">';
+		echo '<input type="text" name="priority" value="priority">';
+		echo '<input type="text" name="status" value="status">';
+		echo '<input type="text" name="due_date" value="due date">';
+		echo '</form>';
+	
 	while ($row = $r4->fetch_array()){
 		echo '<form>';
 		echo '<input type="text" name="name" value='.$row["name"].'>';
