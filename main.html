@@ -15,7 +15,7 @@
 	$r2 = $db->query("USE todo;");
 	echo $r2;
 	
-	$r3 = $db->query("CREATE TABLE task(id INTEGER AUTO_INCREMENT, name VARCHAR(15), descr VARCHAR(255), priority ENUM('high', 'medium', 'low'), status ENUM('in progress', 'complete', 'not started'), due_date DATE, PRIMARY KEY(id));");
+	$r3 = $db->query("CREATE TABLE task(id INTEGER AUTO_INCREMENT, name VARCHAR(15), descr VARCHAR(255), priority ENUM('high', 'medium', 'low'), status ENUM('pending', 'started', 'completed', 'late'), due_date DATE, PRIMARY KEY(id));");
 	
 	//add task 
 	echo '<form action="add_task.php" method="post">';
@@ -35,9 +35,6 @@
 	echo '<input type="date" name="due_date" value="due date">';
 	echo '<input type="submit">';
 	echo '</form>';
-	
-	//for testing purposes
-	$r5 = $db->query("INSERT INTO task(name, descr, priority, status, due_date) VALUES('testname', 'test description', 'high', 'in progress', '2018-01-09');");
 	
 	
 	$r4 = $db->query("SELECT * FROM task");
