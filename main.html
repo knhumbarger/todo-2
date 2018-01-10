@@ -15,7 +15,7 @@
 	$r2 = $db->query("USE todo;");
 	
 	//note: later make priority have specific options
-	$r3 = $db->query("CREATE TABLE task(name VARCHAR 15, descr VARCHAR 255, priority VARCHAR 10, due_date DATE);");
+	$r3 = $db->query("CREATE TABLE task(name VARCHAR 15, descr VARCHAR 255, priority ENUM('high', 'medium', 'low'), status ENUM('in progress', 'complete', 'not started'), due_date DATE);");
 	
 ?>
 </body>
