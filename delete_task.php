@@ -1,17 +1,40 @@
 <?php
+	require_once("class.task.php");
 	$id = '';
+	$name = '';
+	$descr = '';
+	$priority = '';
+	$status = '';
+	$date = '';
 	
 	if(isset($_POST['id'])){
 		$id = $_POST['id'];
 	}
-	
-	$db = new mysqli("localhost", "root", "pass1234", "todo");
+	if(isset($_POST['name'])){
+		$name = $_POST['name'];
+	}
+	if(isset($_POST['descr'])){
+		$descr = $_POST['descr'];
+	};
+	if(isset($_POST['priority'])){
+		$priority = $_POST['priority'];
+	};
+	if(isset($_POST['status'])){
+		$status = $_POST['status'];
+	};
+	if(isset($_POST['due_date'])){
+		$date = $_POST['due_date'];
+	};
+	//$db = new mysqli("localhost", "root", "pass1234", "todo");
 	//echo $db;
-	$statement = "DELETE FROM task WHERE id=".$id.";";
-	echo $statement;
-	$r1 = $db->query($statement);
-	echo $r1;
-	print $r1;
+	//$statement = "DELETE FROM task WHERE id=".$id.";";
+	//echo $statement;
+	//$r1 = $db->query($statement);
+	//echo $r1;
+	//print $r1;
+	
+	$task = new task(null, $name, $descr, $priority, $status, $date);
+	$task->delete_task();
 	
 	echo "<form action='main.php' method='post'>";
 	echo "<input type='submit'>";
