@@ -18,7 +18,7 @@
 	$r3 = $db->query("CREATE TABLE task(id INTEGER AUTO_INCREMENT, name VARCHAR(15), descr VARCHAR(255), priority ENUM('high', 'medium', 'low'), status ENUM('in progress', 'complete', 'not started'), due_date DATE), PRIMARY KEY(id);");
 	
 	//add task 
-	echo '<form>';
+	echo '<form action="add_task.php" method="post">';
 	echo '<input type="text" name="name" value="insert name">';
 	echo '<input type="text" name="descr" value="insert description">';
 	echo '<Select name="priority">
@@ -26,14 +26,14 @@
 		<option value="medium">Medium</option>
 		<option value="low">Low</option>
 		</select>';
-	echo '<Select name="priority">
+	echo '<Select name="status">
 		<option value="pending">Pending</option>
 		<option value="started">Started</option>
 		<option value="completed">Completed</option>
 		<option value="late">Late</option>
 		</select>';
 	echo '<input type="date" name="due_date" value="due date">';
-	echo '<input type="button" name="submit" value="Submit">';
+	echo '<input type="submit">';
 	echo '</form>';
 	
 	//for testing purposes
