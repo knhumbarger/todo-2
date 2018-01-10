@@ -12,17 +12,12 @@
 
 	//began 11:19 PM
 	$r1 = $db->query("CREATE DATABASE IF NOT EXISTS todo;");
-	echo $r1;
-	echo "<br>";
 	
 	$r2 = $db->query("USE todo;");
-	echo $r2;
-	echo "<br>";
+	
 	//note: later make priority have specific options
 	$r3 = $db->query("CREATE TABLE task(name VARCHAR 15, descr VARCHAR 255, priority VARCHAR 10, due_date DATE);");
 	
-	echo $r3;
-	echo "<br>";
 ?>
 </body>
 </html>
