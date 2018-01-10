@@ -63,7 +63,6 @@
 	echo '<input type="text" name="status" value="status" style="font-weight:bold;">';
 	echo '<input type="text" name="due_date" value="due date" style="font-weight:bold;">';
 	echo '</form>';
-	
 	while ($row = $r4->fetch_array()){
 		echo '<form action="delete_task.php" method="post">';
 		echo '<input type="text" name="id" value="'.$row["id"].'">';
@@ -75,7 +74,6 @@
 		echo '<input type="submit" value="delete">';
 		echo '</form>';
 	}
-	
 	$r5 = $mySQL->execute_query("SELECT COUNT(*) FROM task;");
 	$count_total = $r5->fetch_row();
 	echo 'Total tasks: <a href="main.php">'.$count_total[0].'</a><br>';
