@@ -64,7 +64,7 @@
 	echo 'Total tasks: '.$count_total[0].'<br>';
 	
 	$r6 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'pending'");
-	$pending_total = $r5->fetch_row();
+	$pending_total = $r6->fetch_row();
 	echo 'Total pending tasks: '.$pending_total[0].'<br>';
 	
 	$r7 = $db->query("SELECT COUNT(*) FROM task WHERE status = 'started'");
