@@ -15,20 +15,13 @@
 	$r2 = $db->query("USE todo;");
 	echo $r2;
 	
-	//note: later make priority have specific options
 	$r3 = $db->query("CREATE TABLE task(id INTEGER AUTO_INCREMENT, name VARCHAR(15), descr VARCHAR(255), priority ENUM('high', 'medium', 'low'), status ENUM('in progress', 'complete', 'not started'), due_date DATE), PRIMARY KEY(id);");
-	//echo $r3;
 	
 	//for testing purposes
 	$r5 = $db->query("INSERT INTO task VALUES('testname', 'test description', 'high', 'in progress', '2018-01-09');");
-	//echo $r5;
 	
-	//started 11:45 PM
-	//estimate: 30 min
-	//note: fixed an error in create table statement, added a bit of time
 	
 	$r4 = $db->query("SELECT * FROM task");
-	//echo $r4;
 	
 	//headings
 	echo '<form>';
@@ -49,7 +42,6 @@
 		echo '</form>';
 	}
 	
-	//echo '</form>';
 ?>
 </body>
 </html>
