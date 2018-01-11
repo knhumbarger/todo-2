@@ -46,12 +46,74 @@
 	echo '<input type="text" name="due_date" value="due date" style="font-weight:bold;">';
 	echo '</form>';
 	while ($row = $r4->fetch_array()){
+		//find default value for priority drop-down
+		$priority_options = '';
+		if($row["priority"] == 'high'){
+			$priority_options = '<Select name="priority">
+		<option value="high" selected="selected">High</option>
+		<option value="medium">Medium</option>
+		<option value="low">Low</option>
+		</select>';
+		}
+		else if($row["priority"] == 'medium'){
+			$priority_options = '<Select name="priority">
+		<option value="high">High</option>
+		<option value="medium" selected="selected">Medium</option>
+		<option value="low">Low</option>
+		</select>';
+		}
+		else{
+			$priority_options = '<Select name="priority">
+		<option value="high">High</option>
+		<option value="medium">Medium</option>
+		<option value="low" selected="selected">Low</option>
+		</select>';
+		}
+		
+		$status_options = '';
+		//find default value for status drop-down
+		if($row["status"]=='pending'){
+			$status_options = '<Select name="status">
+			<option value="pending" selected="selected">Pending</option>
+			<option value="started">Started</option>
+			<option value="completed">Completed</option>
+			<option value="late">Late</option>
+			</select>';
+		}
+		
+		else if($row["status"]=='started'){
+			$status_options = '<Select name="status">
+			<option value="pending">Pending</option>
+			<option value="started" selected="selected">Started</option>
+			<option value="completed">Completed</option>
+			<option value="late">Late</option>
+			</select>';
+		}
+		
+		else if($row["status"]=='completed'){
+			$status_options = '<Select name="status">
+			<option value="pending">Pending</option>
+			<option value="started">Started</option>
+			<option value="completed" selected="selected">Completed</option>
+			<option value="late">Late</option>
+			</select>';
+		}
+		
+		else{
+			$status_options = '<Select name="status">
+			<option value="pending">Pending</option>
+			<option value="started">Started</option>
+			<option value="completed">Completed</option>
+			<option value="late" selected="selected">Late</option>
+			</select>';
+		}
+		
 		echo '<form action="delete_task.php" method="post">';
 		echo '<input type="text" name="id" value="'.$row["id"].'" readonly>';
 		echo '<input type="text" name="name" value="'.$row["name"].'">';
 		echo '<input type="text" name="descr" value="'.$row["descr"].'">';
-		echo '<input type="text" name="priority" value="'.$row["priority"].'">';
-		echo '<input type="text" name="status" value="'.$row["status"].'">';
+		echo $priority_options;
+		echo $status_options;
 		echo '<input type="text" name="due_date" value="'.$row["due_date"].'">';
 		echo '<input type="submit" name="button" value="Delete" id="btn">';
 		echo '<input type="submit" name="button" value="Update" id="btn">';
