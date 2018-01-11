@@ -1,4 +1,17 @@
+<!doctype html>
 <html>
+<head> 
+<link rel="stylesheet" type="text/css" href="template.css">
+<h1>To Do</h1>
+</head>
+<body>
+<div class="navbar">
+<a href="main.php">Main Page</a>
+<a href="main.php?status=pending">Pending Tasks</a>
+<a href="main.php?status=started">Started Tasks</a>
+<a href="main.php?status=completed">Completed Tasks</a>
+<a href="main.php?status=late">Late Tasks</a>
+</div>
 <?php
 
 	require_once("class.task.php");
@@ -28,8 +41,8 @@
 	$task = new task(null, $name, $descr, $priority, $status, $date);
 	$task->add_task();
 	
-	echo "<form action='main.php' method='post'>";
-	echo "<input type='submit'>";
-	echo "</form>";
+	header('Location: main.php');
+	exit;
+	
 ?>
 </html>
