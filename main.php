@@ -1,11 +1,17 @@
 <!doctype html>
 <html>
 <head> 
-
+<link rel="stylesheet" type="text/css" href="template.css">
 <h1>To Do</h1>
-
 </head>
 <body>
+<div class="navbar">
+<a href="main.php">Main Page</a>
+<a href="main.php?status=pending">Pending Tasks</a>
+<a href="main.php?status=started">Started Tasks</a>
+<a href="main.php?status=completed">Completed Tasks</a>
+<a href="main.php?status=late">Late Tasks</a>
+</div>
 <?php
 	require_once('class.mySQLDAO.php');
 	
@@ -16,11 +22,11 @@
 		$status = $_GET['status'];
 	}
 	
-	echo "STATUS ".$status;
-	
 	$mySQL = new mySQLDAO("localhost", "root", "pass1234");
 	$mySQL->create_DB();
 	$mySQL->create_tables();
+	
+	echo '<div class="content">';
 	
 	//add task 
 	echo '<form action="add_task.php" method="post">';
@@ -38,7 +44,7 @@
 		<option value="late">Late</option>
 		</select>';
 	echo '<input type="date" name="due_date" value="due date">';
-	echo '<input type="submit">';
+	echo '<input type="submit" id="btn">';
 	echo '</form>';
 	
 	if($status == ''){
@@ -66,9 +72,13 @@
 		echo '<input type="text" name="priority" value="'.$row["priority"].'">';
 		echo '<input type="text" name="status" value="'.$row["status"].'">';
 		echo '<input type="text" name="due_date" value="'.$row["due_date"].'">';
-		echo '<input type="submit" value="delete">';
+		echo '<input type="submit" value="Delete" id="btn">';
 		echo '</form>';
 	}
+	
+	echo '</div>';
+	
+	echo '<div class="countbar">';
 	$r5 = $mySQL->execute_query("SELECT COUNT(*) FROM task;");
 	$count_total = $r5->fetch_row();
 	echo 'Total tasks: <a href="main.php">'.$count_total[0].'</a><br>';
@@ -89,6 +99,8 @@
 	$late_total = $r9->fetch_row();
 	echo 'Total late tasks: <a href="main.php?status=late">'.$late_total[0].'</a><br>';
 	
+	echo '</div>';
 ?>
+</div>
 </body>
 </html>
