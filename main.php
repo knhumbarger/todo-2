@@ -28,25 +28,6 @@
 	
 	echo '<div class="content">';
 	
-	//add task 
-	echo '<form action="add_task.php" method="post">';
-	echo '<input type="text" name="name" value="insert name">';
-	echo '<input type="text" name="descr" value="insert description">';
-	echo '<Select name="priority">
-		<option value="high">High</option>
-		<option value="medium">Medium</option>
-		<option value="low">Low</option>
-		</select>';
-	echo '<Select name="status">
-		<option value="pending">Pending</option>
-		<option value="started">Started</option>
-		<option value="completed">Completed</option>
-		<option value="late">Late</option>
-		</select>';
-	echo '<input type="date" name="due_date" value="due date">';
-	echo '<input type="submit" id="btn">';
-	echo '</form>';
-	
 	if($status == ''){
 		$statement = "SELECT * FROM task";
 	}
@@ -76,6 +57,27 @@
 		echo '</form>';
 	}
 	
+	//add task 
+	echo '<form action="add_task.php" method="post">';
+	echo "Add new task:		";
+	echo '<input type="text" name="name" value="insert name">';
+	echo '<input type="text" name="descr" value="insert description">';
+	echo '<Select name="priority">
+		<option value="high">High</option>
+		<option value="medium">Medium</option>
+		<option value="low">Low</option>
+		</select>';
+	echo '<Select name="status">
+		<option value="pending">Pending</option>
+		<option value="started">Started</option>
+		<option value="completed">Completed</option>
+		<option value="late">Late</option>
+		</select>';
+	echo '<input type="date" name="due_date" value="due date">';
+	echo '<input type="submit" id="btn">';
+	echo '</form>';
+	
+	
 	echo '</div>';
 	
 	echo '<div class="countbar">';
@@ -98,7 +100,7 @@
 	$r9 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status='late';");
 	$late_total = $r9->fetch_row();
 	echo 'Total late tasks: <a href="main.php?status=late">'.$late_total[0].'</a><br>';
-	
+
 	echo '</div>';
 ?>
 </div>
