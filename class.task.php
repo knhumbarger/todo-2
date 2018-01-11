@@ -37,5 +37,10 @@
 			$this->mySQL->execute_query($statement);
 			echo "made here also";
 		}
+		public function update_task(){
+			$statement = "UPDATE task SET name='".$this->name."', descr='".$this->descr."', priority='".$this->priority->get_pri()."', status='".$this->status->get_stat()."', due_date='".$this->due_date."' WHERE id=".$this->id.";";
+			echo $statement;
+			$this->mySQL->execute_query($statement);
+		}
 	}
 ?>

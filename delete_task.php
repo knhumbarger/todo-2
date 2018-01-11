@@ -20,6 +20,7 @@
 	$priority = '';
 	$status = '';
 	$date = '';
+	$button='';
 	
 	if(isset($_POST['id'])){
 		$id = $_POST['id'];
@@ -39,9 +40,17 @@
 	if(isset($_POST['due_date'])){
 		$date = $_POST['due_date'];
 	};
+	if(isset($_POST['button'])){
+		$button = $_POST['button'];
+	}
 
-	$task = new task(null, $name, $descr, $priority, $status, $date);
-	$task->delete_task();
+	$task = new task($id, $name, $descr, $priority, $status, $date);
+	if($button == 'delete'){
+		$task->delete_task();
+	}
+	else{
+		$task->update_task();
+	}
 	
 	header('Location: main.php');
 	exit;
