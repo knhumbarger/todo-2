@@ -14,6 +14,11 @@
 		
 		$today = date('Y-m-d');
 		
+		//if task is already completed or late, question becomes 
+		//irrelevant
+		if($status == 'completed' or $status == 'late'){
+			return 0;
+		}
 		//task if past due if due date is earlier
 		//than today's date
 		
