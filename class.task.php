@@ -7,8 +7,8 @@
 		private $id = null;
 		private $name = '';
 		private $descr = '';
-		private $priority = '';
-		private $status = '';
+		private $priority = null;
+		private $status = null;
 		private $due_date = '';
 		private $mySQL = null;
 		
@@ -19,8 +19,8 @@
 			$this->priority = new priority($_priority);
 			$this->status = new status($_status);
 			$this->due_date=$_due_date;
-			$this->mySQL = new mySQLDAO("localhost", "root", "pass1234");
-			$this->mySQL->connect_db("todo");
+			$this->mySQL = new mySQLDAO();
+			$this->mySQL->connect_db();
 		}
 		public function add_task(){
 			$statement = "INSERT INTO task(name, descr, priority, status, due_date) VALUES('".$this->name."', '".$this->descr."', '".$this->priority->get_pri()."', '".$this->status->get_stat()."', '".$this->due_date."');";
@@ -40,12 +40,10 @@
 			if($this->mySQL->execute_query($statement)){
 				return 0;
 			}
-			echo "made here also";
 			return 1;
 		}
 		public function update_task(){
 			$statement = "UPDATE task SET name='".$this->name."', descr='".$this->descr."', priority='".$this->priority->get_pri()."', status='".$this->status->get_stat()."', due_date='".$this->due_date."' WHERE id=".$this->id.";";
-			echo $statement;
 			if (!$this->mySQL->execute_query($statement)){
 				return 0;
 			}
@@ -53,7 +51,6 @@
 		}
 		public function mark_late(){
 			$statement = "UPDATE task SET status = 'late' WHERE id = ".$this->id.";";
-			echo $statement;
 			if (!$this->mySQL->execute_query($statement)){
 				return 0;
 			}

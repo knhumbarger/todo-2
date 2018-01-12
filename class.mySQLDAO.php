@@ -1,19 +1,23 @@
 <?php 
 	class mySQLDAO{
-		private $conn;
+		private $conn = null;
+		private $host = "localhost";
+		private $username = "root";
+		private $pass = "pass1234";
+		private $db = "todo";
 		
-		public function __construct($_host, $_username, $_pass){
+		public function __construct(){
 			try{
-				$this->conn = new mysqli("localhost", "root", "pass1234");
+				$this->conn = new mysqli($this->host, $this->username, $this->pass);
 			} catch (Exception $e){
 				print "Error encountered, unable to establish connection to mySQL: ".$e;
 				return 0;
 			}
 			return 1;
 		}
-		public function connect_db($_db){
+		public function connect_db(){
 			try{
-				$this->conn = new mysqli("localhost", "root", "pass1234", "todo");
+				$this->conn = new mysqli($this->host, $this->username, $this->pass, $this->db);
 			} catch (Exception $e){
 				print "Error encountered, unable to establish connection to mySQL todo database: ".$e;
 				return 0;
@@ -83,7 +87,7 @@
 		private function populate_status(){
 			$options = ['pending', 'started', 'completed', 'late'];
 			
-			for ($i=0; $i<3; $i++){
+			for ($i=0; $i<4; $i++){
 				try{
 					$statement = "INSERT INTO status VALUES('".$options[$i]."');";
 					$r7 = $this->conn->query($statement);

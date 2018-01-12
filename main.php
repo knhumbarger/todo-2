@@ -28,7 +28,7 @@
 		$status = $_GET['status'];
 	}
 	
-	if(!$mySQL = new mySQLDAO("localhost", "root", "pass1234")){
+	if(!$mySQL = new mySQLDAO()){
 		echo "Error: could not establish connection to the mySQL.";
 	}
 	if(!$mySQL->create_DB()){
@@ -60,6 +60,11 @@
 	
 	//create tasks table on main page
 	while ($row = $r4->fetch_array()){
+		
+		//check if task is now late and update if so
+		if(check_late($row["id"], $row["name"], $row["descr"], $row["priority"], $row["status"], $row["due_date"])){
+			$row["status"] = "late";
+		}
 		
 		//find default value for priority drop-down
 		$priority_options = '';
@@ -121,10 +126,6 @@
 			<option value="completed">Completed</option>
 			<option value="late" selected="selected">Late</option>
 			</select>';
-		}
-		
-		if(check_late($row["id"], $row["name"], $row["descr"], $row["priority"], $row["status"], $row["due_date"])){
-			$row["status"] = "late";
 		}
 		
 		//display the table row
