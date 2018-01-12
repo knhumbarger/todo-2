@@ -12,6 +12,8 @@
 <a href="main.php?status=completed">Completed Tasks</a>
 <a href="main.php?status=late">Late Tasks</a>
 </div>
+<br>
+<br>
 <?php
 	require_once('class.mySQLDAO.php');
 	
