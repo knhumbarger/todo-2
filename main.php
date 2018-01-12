@@ -16,6 +16,7 @@
 <br>
 <?php
 	require_once('class.mySQLDAO.php');
+	require_once('check_late.php');
 	
 	$status='';
 	

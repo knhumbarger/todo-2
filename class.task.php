@@ -51,5 +51,13 @@
 			}
 			return 1;
 		}
+		public function mark_late(){
+			$statement = "UPDATE task SET status = 'late' WHERE id = ".$this->id.";";
+			echo $statement;
+			if (!$this->mySQL->execute_query($statement)){
+				return 0;
+			}
+			return 1;
+		}
 	}
 ?>
