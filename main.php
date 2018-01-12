@@ -123,6 +123,10 @@
 			</select>';
 		}
 		
+		if(check_late($row["id"], $row["name"], $row["descr"], $row["priority"], $row["status"], $row["due_date"])){
+			$row["status"] = "late";
+		}
+		
 		//display the table row
 		echo '<form action="delete_task.php" method="post">';
 		echo '<input type="text" name="id" value="'.$row["id"].'" readonly>';

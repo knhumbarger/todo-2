@@ -22,6 +22,8 @@
 		//if year of the due date is less than year of today
 		if($date[2] < $today[2]){
 			//late
+			update_late();
+			return 1;
 		}
 		//if year of the due date is greater than or equal to
 		//year of today
@@ -30,6 +32,8 @@
 				//today
 				if ($date[0] < $today[0]){
 					//late
+					update_late();
+					return 1;
 				}
 				//if month of due date is greater than or equal to
 				//month of today and
@@ -38,9 +42,12 @@
 					//today
 					if ($date[1] < $today[1]){
 						//late
+						update_late();
+						return 1;
 					}
 					else{
 						//not late
+						return 0;
 					}
 				}
 		}
@@ -48,10 +55,13 @@
 		function update_late(){
 			if(!$task = new task($id, $name, $descr, $priority, $status, $date)){
 				print "Unable to create new object of class task.";
+				return 0;
 			}
 			if (!task->mark_late()){
 				print "Unable to update task status to late.";
+				return 0;
 			}
+			return 1;
 		}
 	}
 ?>
