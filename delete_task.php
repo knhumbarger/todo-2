@@ -48,9 +48,10 @@
 		print "Unable to create new object of class task.";
 	}
 	
-	if($button == 'delete'){
+	if($button == 'Delete'){
 		if(!$task->delete_task()){
 			print "Unable to delete task from task table.";
+			echo "Unable to delete task from task table.";
 		}
 	}
 	else{

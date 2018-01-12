@@ -25,7 +25,10 @@
 		public function add_task(){
 			$statement = "INSERT INTO task(name, descr, priority, status, due_date) VALUES('".$this->name."', '".$this->descr."', '".$this->priority->get_pri()."', '".$this->status->get_stat()."', '".$this->due_date."');";
 			echo $statement;
-			$this->mySQL->execute_query($statement);
+			if(!$this->mySQL->execute_query($statement)){
+				return 0;
+			}
+			return 1;
 			
 		}
 		public function delete_task(){
@@ -34,13 +37,19 @@
 			//echo "made here";
 			$statement = "DELETE FROM task WHERE id = '".$this->id."';";
 			echo $statement;
-			$this->mySQL->execute_query($statement);
+			if($this->mySQL->execute_query($statement)){
+				return 0;
+			}
 			echo "made here also";
+			return 1;
 		}
 		public function update_task(){
 			$statement = "UPDATE task SET name='".$this->name."', descr='".$this->descr."', priority='".$this->priority->get_pri()."', status='".$this->status->get_stat()."', due_date='".$this->due_date."' WHERE id=".$this->id.";";
 			echo $statement;
-			$this->mySQL->execute_query($statement);
+			if (!$this->mySQL->execute_query($statement)){
+				return 0;
+			}
+			return 1;
 		}
 	}
 ?>
