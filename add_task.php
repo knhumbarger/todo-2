@@ -38,8 +38,12 @@
 		$date = $_POST['due_date'];
 	};
 	
-	$task = new task(null, $name, $descr, $priority, $status, $date);
-	$task->add_task();
+	if(!$task = new task(null, $name, $descr, $priority, $status, $date)){
+		print "Unable to create new object of task class.";
+	}
+	if(!$task->add_task()){
+		print "Unable to add new task to task table in todo database.";
+	}
 	
 	header('Location: main.php');
 	exit;

@@ -44,12 +44,19 @@
 		$button = $_POST['button'];
 	}
 
-	$task = new task($id, $name, $descr, $priority, $status, $date);
+	if(!$task = new task($id, $name, $descr, $priority, $status, $date)){
+		print "Unable to create new object of class task.";
+	}
+	
 	if($button == 'delete'){
-		$task->delete_task();
+		if(!$task->delete_task()){
+			print "Unable to delete task from task table.";
+		}
 	}
 	else{
-		$task->update_task();
+		if(!$task->update_task()){
+			print "Unable to update task in task table.";
+		}
 	}
 	
 	header('Location: main.php');

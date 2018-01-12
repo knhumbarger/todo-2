@@ -18,13 +18,22 @@
 	$status='';
 	
 	//check for get method status variable
+	//this is used to filter the tasks by status when
+	//the user clicks on either one of the "counts" on the 
+	//right side of the page or a link on the navbar
 	if(isset($_GET['status'])){
 		$status = $_GET['status'];
 	}
 	
-	$mySQL = new mySQLDAO("localhost", "root", "pass1234");
-	$mySQL->create_DB();
-	$mySQL->create_tables();
+	if(!$mySQL = new mySQLDAO("localhost", "root", "pass1234")){
+		echo "Error: could not establish connection to the mySQL.";
+	}
+	if(!$mySQL->create_DB()){
+		echo "Error: could not establish connection to the todo database.";
+	}
+	if(!$mySQL->create_tables()){
+		echo "Error: could not create one or more tables in the todo database.";
+	}
 	
 	echo '<div class="content">';
 	
@@ -45,7 +54,10 @@
 	echo '<input type="text" name="status" value="status" style="font-weight:bold;">';
 	echo '<input type="text" name="due_date" value="due date" style="font-weight:bold;">';
 	echo '</form>';
+	
+	//create tasks table on main page
 	while ($row = $r4->fetch_array()){
+		
 		//find default value for priority drop-down
 		$priority_options = '';
 		if($row["priority"] == 'high'){
@@ -108,6 +120,7 @@
 			</select>';
 		}
 		
+		//display the table row
 		echo '<form action="delete_task.php" method="post">';
 		echo '<input type="text" name="id" value="'.$row["id"].'" readonly>';
 		echo '<input type="text" name="name" value="'.$row["name"].'">';
@@ -142,27 +155,47 @@
 	
 	
 	echo '</div>';
+
+	try{
+		echo '<div class="countbar">';
+		$r5 = $mySQL->execute_query("SELECT COUNT(*) FROM task;");
+		$count_total = $r5->fetch_row();
+		echo 'Total tasks: <a href="main.php">'.$count_total[0].'</a><br>';
+	} catch (Exception $e){
+		echo "Unable to retrieve the count for all tasks.";
+	}
 	
-	echo '<div class="countbar">';
-	$r5 = $mySQL->execute_query("SELECT COUNT(*) FROM task;");
-	$count_total = $r5->fetch_row();
-	echo 'Total tasks: <a href="main.php">'.$count_total[0].'</a><br>';
+	try{
+		$r6 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'pending';");
+		$pending_total = $r6->fetch_row();
+		echo 'Total pending tasks: <a href="main.php?status=pending">'.$pending_total[0].'</a><br>';
+	} catch (Exception $e){
+		echo "Unable to retrieve the count for pending tasks.";
+	}
 	
-	$r6 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'pending';");
-	$pending_total = $r6->fetch_row();
-	echo 'Total pending tasks: <a href="main.php?status=pending">'.$pending_total[0].'</a><br>';
+	try{
+		$r7 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'started';");
+		$started_total = $r7->fetch_row();
+		echo 'Total started tasks: <a href="main.php?status=started">'.$started_total[0].'</a><br>';
+	} catch (Exception $e){
+		echo "Unable to retrieve the count for started tasks.";
+	}
 	
-	$r7 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'started';");
-	$started_total = $r7->fetch_row();
-	echo 'Total started tasks: <a href="main.php?status=started">'.$started_total[0].'</a><br>';
+	try{
+		$r8 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'completed';");
+		$completed_total = $r8->fetch_row();
+		echo 'Total completed tasks: <a href="main.php?status=completed">'.$completed_total[0].'</a><br>';
+	} catch (Exception $e){
+		echo "Unable to retrieve the count for completed tasks.";
+	}
 	
-	$r8 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'completed';");
-	$completed_total = $r8->fetch_row();
-	echo 'Total completed tasks: <a href="main.php?status=completed">'.$completed_total[0].'</a><br>';
-	
-	$r9 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status='late';");
-	$late_total = $r9->fetch_row();
-	echo 'Total late tasks: <a href="main.php?status=late">'.$late_total[0].'</a><br>';
+	try{
+		$r9 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status='late';");
+		$late_total = $r9->fetch_row();
+		echo 'Total late tasks: <a href="main.php?status=late">'.$late_total[0].'</a><br>';
+	} catch (Exception $e){
+		echo "Unable to retrieve the count for late tasks.";
+	}
 
 	echo '</div>';
 ?>

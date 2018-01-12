@@ -31,8 +31,8 @@
 		public function delete_task(){
 			//$db = new mysqli("localhost", "root", "pass1234", "todo");
 			//echo $db;
-			echo "made here";
-			$statement = "DELETE FROM task WHERE descr = '".$this->descr."';";
+			//echo "made here";
+			$statement = "DELETE FROM task WHERE id = '".$this->id."';";
 			echo $statement;
 			$this->mySQL->execute_query($statement);
 			echo "made here also";
