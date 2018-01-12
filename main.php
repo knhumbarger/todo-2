@@ -160,15 +160,16 @@
 	echo '<input type="date" name="due_date" value="due date">';
 	echo '<input type="submit" id="btn">';
 	echo '</form>';
-	
+	echo '<br>';
 	
 	echo '</div>';
 
 	try{
 		echo '<div class="countbar">';
+		echo '<br>';
 		$r5 = $mySQL->execute_query("SELECT COUNT(*) FROM task;");
 		$count_total = $r5->fetch_row();
-		echo 'Total tasks: <a href="main.php">'.$count_total[0].'</a><br>';
+		echo 'Total tasks: <a href="main.php">'.$count_total[0].'</a><br><br>';
 	} catch (Exception $e){
 		echo "Unable to retrieve the count for all tasks.";
 	}
@@ -176,7 +177,7 @@
 	try{
 		$r6 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'pending';");
 		$pending_total = $r6->fetch_row();
-		echo 'Total pending tasks: <a href="main.php?status=pending">'.$pending_total[0].'</a><br>';
+		echo 'Total pending tasks: <a href="main.php?status=pending">'.$pending_total[0].'</a><br><br>';
 	} catch (Exception $e){
 		echo "Unable to retrieve the count for pending tasks.";
 	}
@@ -184,7 +185,7 @@
 	try{
 		$r7 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'started';");
 		$started_total = $r7->fetch_row();
-		echo 'Total started tasks: <a href="main.php?status=started">'.$started_total[0].'</a><br>';
+		echo 'Total started tasks: <a href="main.php?status=started">'.$started_total[0].'</a><br><br>';
 	} catch (Exception $e){
 		echo "Unable to retrieve the count for started tasks.";
 	}
@@ -192,7 +193,7 @@
 	try{
 		$r8 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status = 'completed';");
 		$completed_total = $r8->fetch_row();
-		echo 'Total completed tasks: <a href="main.php?status=completed">'.$completed_total[0].'</a><br>';
+		echo 'Total completed tasks: <a href="main.php?status=completed">'.$completed_total[0].'</a><br><br>';
 	} catch (Exception $e){
 		echo "Unable to retrieve the count for completed tasks.";
 	}
@@ -200,7 +201,7 @@
 	try{
 		$r9 = $mySQL->execute_query("SELECT COUNT(*) FROM task WHERE status='late';");
 		$late_total = $r9->fetch_row();
-		echo 'Total late tasks: <a href="main.php?status=late">'.$late_total[0].'</a><br>';
+		echo 'Total late tasks: <a href="main.php?status=late">'.$late_total[0].'</a><br><br>';
 	} catch (Exception $e){
 		echo "Unable to retrieve the count for late tasks.";
 	}
