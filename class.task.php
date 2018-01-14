@@ -32,12 +32,9 @@
 			
 		}
 		public function delete_task(){
-			//$db = new mysqli("localhost", "root", "pass1234", "todo");
-			//echo $db;
-			//echo "made here";
 			$statement = "DELETE FROM task WHERE id = '".$this->id."';";
 			echo $statement;
-			if($this->mySQL->execute_query($statement)){
+			if(!$this->mySQL->execute_query($statement)){
 				return 0;
 			}
 			return 1;

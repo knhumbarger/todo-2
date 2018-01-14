@@ -133,6 +133,7 @@
 				return $r7;
 			} catch (Exception $e){
 				print "Error encountered, unable to execute SQL statement ".$statement.": ".$e;
+				echo "Error encountered, unable to execute SQL statement ".$statement.": ".$e;
 				return 0;
 			}
 		}
