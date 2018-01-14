@@ -135,7 +135,7 @@
 		echo '<input type="text" name="descr" value="'.$row["descr"].'">';
 		echo $priority_options;
 		echo $status_options;
-		echo '<input type="text" name="due_date" value="'.$row["due_date"].'">';
+		echo '<input type="date" name="due_date" value="'.$row["due_date"].'">';
 		echo '<input type="submit" name="button" value="Delete" id="btn">';
 		echo '<input type="submit" name="button" value="Update" id="btn">';
 		echo '</form>';
@@ -205,9 +205,7 @@
 	} catch (Exception $e){
 		echo "Unable to retrieve the count for late tasks.";
 	}
-
-	echo '</div>';
 ?>
-</div>
+	
 </body>
 </html>

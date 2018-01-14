@@ -52,16 +52,47 @@
 		if(!$task->delete_task()){
 			print "Unable to delete task from task table.";
 			echo "Unable to delete task from task table.";
+			echo '<form action="main.php" method="post">';
+			echo '<input type="submit">';
+			echo '</form>';
+		}
+		else{
+			header('Location: main.php');
+			exit;
 		}
 	}
 	else{
-		if(!$task->update_task()){
+		
+		if(strlen($name)>15){
+			echo "Invalid task name: please enter a task name that is under 15 characters.";
+			echo '<form action="main.php" method="post">';
+			echo '<input type="submit">';
+			echo '</form>';
+		}
+		else if(strlen($descr)>255){
+			echo "Invalid task description: please enter a task description that is under 255 characters.";
+			echo '<form action="main.php" method="post">';
+			echo '<input type="submit">';
+			echo '</form>';
+		}
+		else if(!DateTime::createFromFormat('Y-m-d', $date)){
+			echo "Invalid task due date: please enter a valid date in mm/dd/yyyy format.";
+			echo '<form action="main.php" method="post">';
+			echo '<input type="submit">';
+			echo '</form>';
+		}
+		
+		else if(!$task->update_task()){
 			print "Unable to update task in task table.";
+			echo '<form action="main.php" method="post">';
+			echo '<input type="submit">';
+			echo '</form>';
+		}
+		else{
+			header('Location: main.php');
+			exit;
 		}
 	}
-	
-	header('Location: main.php');
-	exit;
 	
 ?>
 </body>
