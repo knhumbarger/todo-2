@@ -8,11 +8,17 @@
 		private $db;
 		
 		public function __construct(){
-			$this->mySQL_details = require_once('config/config.php');
-			$this->host = $this ->mySQL_details['host'];
-			$this->username = $this->mySQL_details['username'];
-			$this->password = $this->mySQL_details['pass'];
-			$this->db = $this->mySQL_details['db'];
+			try{
+				$this->mySQL_details = require('config/config.php');
+				$this->host = $this ->mySQL_details['host'];
+				$this->username = $this->mySQL_details['username'];
+				$this->password = $this->mySQL_details['pass'];
+				$this->db = $this->mySQL_details['db'];
+			} catch (Exception $e){
+				print "Error encountered, unable to load in config details.";
+				echo "Error encountered, unable to load in config details.";
+				return 0;
+			}
 			try{
 				$this->conn = new mysqli($this->host, $this->username, $this->password);
 			} catch (Exception $e){
@@ -106,18 +112,16 @@
 			return 1;
 		}
 		public function populate_task(){
-			$dummy_data = [['buy groceries', '...', 'high', 'started', '01-13-2018'],
-							['dishes', '...', 'medium', 'pending', '02-21-2018'],
-							['homework', '...', 'high', 'completed', '03-05-2018'],
-							['laundry', '...', 'low', 'pending', '01-12-2018'],
-							['pay bills', '...', 'medium', 'late', '12-12-2017']];
+			$dummy_data = [['buy groceries', '...', 'high', 'started', '2018-01-14'],
+							['dishes', '...', 'medium', 'pending', '2018-03-04'],
+							['homework', '...', 'high', 'completed', '2018-03-05'],
+							['laundry', '...', 'low', 'pending', '2018-11-12'],
+							['pay bills', '...', 'medium', 'pending', '2019-08-21']];
 			
 			for ($i = 0; $i<sizeof($dummy_data); $i++){
-				$statement = "INSERT INTO task VALUES(".$dummy_data[$i][0].",".$dummy_data[$i][1].",".$dummy_data[$i][2].",".$dummy_data[$i][3].",".$dummy_data[$i][4].");";
-				try{
-					$this->execute_query($statement);
-				} catch (Exception $e){
-					print "Error encountered, unable to add row to task table: ".$e;
+				$statement = "INSERT INTO task(name, descr, priority, status, due_date) VALUES('".$dummy_data[$i][0]."', '".$dummy_data[$i][1]."', '".$dummy_data[$i][2]."', '".$dummy_data[$i][3]."', '".$dummy_data[$i][4]."');";
+				if(!$this->execute_query($statement)){
+					print "Error encountered, unable to add row to task table. Statement used: ".$statement."\n";
 					return 0;
 				}
 			}
@@ -132,5 +136,14 @@
 				return 0;
 			}
 		}
+		/*public function close_conn(){
+			try{
+				$this->conn->close();
+				return 1;
+			} catch (Exception $e){
+				print "Error encountered, unable to close connection: ".$e;
+				return 0;
+			}
+		}*/
 	}
 ?>

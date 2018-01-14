@@ -58,16 +58,6 @@
 	echo '<th>Status</th>';
 	echo '<th>Due Date</th>';
 	echo '</tr>';
-	//echo '</table>';
-	
-	//echo '<form>';
-	//echo '<input type="text" name="id" value="ID" style="font-weight:bold;">';
-	//echo '<input type="text" name="name" value="name" style="font-weight:bold;">';
-	//echo '<input type="text" name="descr" value="description" style="font-weight:bold;">';
-	//echo '<input type="text" name="priority" value="priority" style="font-weight:bold;">';
-	//echo '<input type="text" name="status" value="status" style="font-weight:bold;">';
-	//echo '<input type="text" name="due_date" value="due date" style="font-weight:bold;">';
-	//echo '</form>';
 	
 	//create tasks table on main page
 	while ($row = $r4->fetch_array()){
