@@ -49,14 +49,25 @@
 	$r4 = $mySQL->execute_query($statement);
 	
 	//headings
-	echo '<form>';
-	echo '<input type="text" name="id" value="ID" style="font-weight:bold;">';
-	echo '<input type="text" name="name" value="name" style="font-weight:bold;">';
-	echo '<input type="text" name="descr" value="description" style="font-weight:bold;">';
-	echo '<input type="text" name="priority" value="priority" style="font-weight:bold;">';
-	echo '<input type="text" name="status" value="status" style="font-weight:bold;">';
-	echo '<input type="text" name="due_date" value="due date" style="font-weight:bold;">';
-	echo '</form>';
+	echo '<table>';
+	echo '<tr>';
+	echo '<th>ID</th>';
+	echo '<th>Name</th>';
+	echo '<th>Description</th>';
+	echo '<th>Priority</th>';
+	echo '<th>Status</th>';
+	echo '<th>Due Date</th>';
+	echo '</tr>';
+	//echo '</table>';
+	
+	//echo '<form>';
+	//echo '<input type="text" name="id" value="ID" style="font-weight:bold;">';
+	//echo '<input type="text" name="name" value="name" style="font-weight:bold;">';
+	//echo '<input type="text" name="descr" value="description" style="font-weight:bold;">';
+	//echo '<input type="text" name="priority" value="priority" style="font-weight:bold;">';
+	//echo '<input type="text" name="status" value="status" style="font-weight:bold;">';
+	//echo '<input type="text" name="due_date" value="due date" style="font-weight:bold;">';
+	//echo '</form>';
 	
 	//create tasks table on main page
 	while ($row = $r4->fetch_array()){
@@ -129,41 +140,23 @@
 		}
 		
 		//display the table row
+		echo '<tr>';
 		echo '<form action="delete_task.php" method="post">';
-		echo '<input type="text" name="id" value="'.$row["id"].'" readonly>';
-		echo '<input type="text" name="name" value="'.$row["name"].'">';
-		echo '<input type="text" name="descr" value="'.$row["descr"].'">';
-		echo $priority_options;
-		echo $status_options;
-		echo '<input type="date" name="due_date" value="'.$row["due_date"].'">';
+		echo '<td><input type="text" name="id" value="'.$row["id"].'" readonly></td>';
+		echo '<td><input type="text" name="name" value="'.$row["name"].'"></td>';
+		echo '<td><input type="text" name="descr" value="'.$row["descr"].'"></td>';
+		echo '<td>'.$priority_options.'</td>';
+		echo '<td>'.$status_options.'</td>';
+		echo '<td><input type="date" name="due_date" value="'.$row["due_date"].'">';
 		echo '<input type="submit" name="button" value="Delete" id="btn">';
-		echo '<input type="submit" name="button" value="Update" id="btn">';
+		echo '<input type="submit" name="button" value="Update" id="btn"></td>';
 		echo '</form>';
+		echo '</tr>';
 	}
 	
-	//add task 
-	echo '<form action="add_task.php" method="post">';
-	echo "Add new task:		";
-	echo '<input type="text" name="name" value="insert name">';
-	echo '<input type="text" name="descr" value="insert description">';
-	echo '<Select name="priority">
-		<option value="high">High</option>
-		<option value="medium">Medium</option>
-		<option value="low">Low</option>
-		</select>';
-	echo '<Select name="status">
-		<option value="pending">Pending</option>
-		<option value="started">Started</option>
-		<option value="completed">Completed</option>
-		<option value="late">Late</option>
-		</select>';
-	echo '<input type="date" name="due_date" value="due date">';
-	echo '<input type="submit" id="btn">';
-	echo '</form>';
-	echo '<br>';
-	
+	echo '</table>';
 	echo '</div>';
-
+	
 	try{
 		echo '<div class="countbar">';
 		echo '<br>';
@@ -205,6 +198,33 @@
 	} catch (Exception $e){
 		echo "Unable to retrieve the count for late tasks.";
 	}
+	
+	//add task 
+	echo '<br>';
+	echo '</div>';
+	echo '<div class="content">';
+	echo '<form action="add_task.php" method="post">';
+	echo '<h2>Add new task</h2>';
+	echo '<input type="text" name="name" value="insert name">';
+	echo '<input type="text" name="descr" value="insert description">';
+	echo '<Select name="priority">
+		<option value="high">High</option>
+		<option value="medium">Medium</option>
+		<option value="low">Low</option>
+		</select>';
+	echo '<Select name="status">
+		<option value="pending">Pending</option>
+		<option value="started">Started</option>
+		<option value="completed">Completed</option>
+		<option value="late">Late</option>
+		</select>';
+	echo '<input type="date" name="due_date" value="due date">';
+	echo '<input type="submit" id="btn">';
+	echo '</form>';
+	echo '<br>';
+	
+	echo '</div>';
+	
 ?>
 	
 </body>
