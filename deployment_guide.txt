@@ -1,0 +1,8 @@
+---TODO APP DEPLOYMENT GUIDE---
+1. install Apache, PHP, and MySQL on a Windows 10 machine (for help, see the following tutorial: https://www.znetlive.com/blog/how-to-install-apache-php-and-mysql-on-windows-10-machine/)
+2. clone repository into Apache htdocs folder. For example, if Apache is installed at C:\Apache24, then you should clone the repository into C:\Apache24\htdocs
+3. Edit the config.php file contained in the config folder within the todo-2 folder. For the variables "host", "username", and "password", insert your MySQL credentials.
+4. In a terminal, run the startup_script.php file
+5. Open web browser and navigate to the main page of the application. This can be accomplished by navigating to localhost:[port associated with your Apache install]/htdocs/todo-2/main.php
+
+The application should now be up and running.
