@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head> 
-<link rel="stylesheet" type="text/css" href="template.css">
+<link rel="stylesheet" type="text/css" href="CSS/template.css">
 <h1>To Do</h1>
 </head>
 <body>
@@ -16,7 +16,7 @@
 <br>
 <?php
 	require_once('class.mySQLDAO.php');
-	require_once('check_late.php');
+	require_once('late_functions/check_late.php');
 	
 	$status='';
 	
@@ -203,8 +203,8 @@
 	echo '<br>';
 	echo '</div>';
 	echo '<div class="content">';
+	echo '<h3>Add new task</h3>';
 	echo '<form action="add_task.php" method="post">';
-	echo '<h2>Add new task</h2>';
 	echo '<input type="text" name="name" value="insert name">';
 	echo '<input type="text" name="descr" value="insert description">';
 	echo '<Select name="priority">

@@ -1,23 +1,30 @@
 <?php 
 	class mySQLDAO{
 		private $conn = null;
-		private $host = "localhost";
-		private $username = "root";
-		private $pass = "pass1234";
-		private $db = "todo";
+		private $mySQL_details;
+		private $host;
+		private $username;
+		private $password;
+		private $db;
 		
 		public function __construct(){
+			$this->mySQL_details = require_once('config/config.php');
+			$this->host = $this ->mySQL_details['host'];
+			$this->username = $this->mySQL_details['username'];
+			$this->password = $this->mySQL_details['pass'];
+			$this->db = $this->mySQL_details['db'];
 			try{
-				$this->conn = new mysqli($this->host, $this->username, $this->pass);
+				$this->conn = new mysqli($this->host, $this->username, $this->password);
 			} catch (Exception $e){
 				print "Error encountered, unable to establish connection to mySQL: ".$e;
 				return 0;
 			}
+			
 			return 1;
 		}
 		public function connect_db(){
 			try{
-				$this->conn = new mysqli($this->host, $this->username, $this->pass, $this->db);
+				$this->conn = new mysqli($this->host, $this->username, $this->password, $this->db);
 			} catch (Exception $e){
 				print "Error encountered, unable to establish connection to mySQL todo database: ".$e;
 				return 0;
