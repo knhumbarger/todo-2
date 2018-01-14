@@ -105,6 +105,24 @@
 			}
 			return 1;
 		}
+		public function populate_task(){
+			$dummy_data = [['buy groceries', '...', 'high', 'started', '01-13-2018'],
+							['dishes', '...', 'medium', 'pending', '02-21-2018'],
+							['homework', '...', 'high', 'completed', '03-05-2018'],
+							['laundry', '...', 'low', 'pending', '01-12-2018'],
+							['pay bills', '...', 'medium', 'late', '12-12-2017']];
+			
+			for ($i = 0; $i<sizeof($dummy_data); $i++){
+				$statement = "INSERT INTO task VALUES(".$dummy_data[$i][0].",".$dummy_data[$i][1].",".$dummy_data[$i][2].",".$dummy_data[$i][3].",".$dummy_data[$i][4].");";
+				try{
+					$this->execute_query($statement);
+				} catch (Exception $e){
+					print "Error encountered, unable to add row to task table: ".$e;
+					return 0;
+				}
+			}
+			return 1;
+		}
 		public function execute_query($statement){
 			try{
 				$r7 = $this->conn->query($statement);
