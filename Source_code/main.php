@@ -190,7 +190,6 @@
 	}
 	
 	//add task 
-	echo '<br>';
 	echo '</div>';
 	echo '<div class="content">';
 	echo '<h3>Add new task</h3>';

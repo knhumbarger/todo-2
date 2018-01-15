@@ -1,7 +1,7 @@
 <?php
 	class status{
 		
-		private $stat;
+		private $stat = '';
 		
 		public function __construct($_stat){
 			$this->stat = $_stat;

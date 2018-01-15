@@ -1,6 +1,6 @@
 <?php
 	class priority{
-		private $pri;
+		private $pri = '';
 	
 		public function __construct($_pri){
 			$this->pri = $_pri;
